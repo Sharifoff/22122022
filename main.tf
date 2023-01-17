@@ -27,5 +27,4 @@ resource "aws_instance" "app_server" {
 }
 
 
-#1111111333
 #111111112
