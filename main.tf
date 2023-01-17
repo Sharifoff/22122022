@@ -9,11 +9,11 @@ terraform {
 
   required_version = ">= 1.2.0"
 
-  backend "s3" {
+  #backend "s3" {
   # Replace this with your bucket name!
-  bucket = "soccar081222"
-  key    = "global/s3/terraform.tfstate"
-  region = "us-east-1"
+  #bucket = "soccar081222"
+  #key    = "global/s3/terraform.tfstate"
+  #region = "us-east-1"
   }
 
 }
@@ -40,26 +40,3 @@ resource "aws_instance" "app_server" {
 }
 
 
-
-
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "soccar081222"
-
-}
-
-
-resource "aws_s3_bucket_versioning" "enabled" {
-  bucket = aws_s3_bucket.terraform_state.id
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-
-
-resource "aws_s3_bucket_public_access_block" "public_access" {
-  bucket                  = aws_s3_bucket.terraform_state.id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
